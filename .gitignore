@@ -1,20 +1,21 @@
 ```
-# Python cache files
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
 # Dependencies
-venv/
 .venv/
+venv/
+env/
 .env
 .env.local
 .env.*
 
-# Build and distribution
-build/
+# Build artifacts
 dist/
+build/
 *.egg-info/
 
 # Logs
@@ -25,14 +26,17 @@ dist/
 htmlcov/
 coverage/
 
-# IDE specific
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
-# OS specific
+# OS
 .DS_Store
 Thumbs.db
+
+# Testing
+.pytest_cache/
+.mypy_cache/
 ```
