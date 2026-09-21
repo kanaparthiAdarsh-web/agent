@@ -1,4 +1,4 @@
-"""SQLite-based storage repositories for research data."""
+"""Storage repositories for research data - using canonical app.schemas."""
 
 import logging
 import sqlite3
@@ -7,12 +7,13 @@ from datetime import datetime
 from pathlib import Path
 import json
 
+# Use canonical schemas from app.schemas
 from app.schemas import (
     PaperMetadata, PaperCard, ChunkData, SourceClaim, Evidence,
     MethodologyComparison, DatasetComparison, ResultsComparison,
     PaperComparisonMatrix, LimitationExtraction, LimitationCluster,
     GapCandidate, GapVerification, Counterevidence, ResearchDirection,
-    GapAnalysisResult, ResearchJob, WorkflowStatus
+    GapAnalysisResult, ResearchJob, WorkflowStatus, WorkflowStep, StepResult
 )
 from app.exceptions import StorageError
 
