@@ -6,27 +6,31 @@ __pycache__/
 # Dependencies
 .venv/
 venv/
-.env
-.env.local
-*.env.*
+node_modules/
 
 # Logs and temp files
 *.log
 *.tmp
+*.swp
+
+# Environment files
+.env
+.env.local
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 
+# Build artifacts
+dist/
+build/
+target/
+
 # Coverage reports
 .coverage
 coverage/
 htmlcov/
-
-# Distribution artifacts
-dist/
-build/
-target/
 
 # Testing
 .pytest_cache/

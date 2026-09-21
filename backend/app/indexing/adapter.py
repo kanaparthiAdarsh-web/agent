@@ -115,7 +115,7 @@ class IndexingAdapter:
         
         # Generate embeddings for semantic index
         texts = [doc.page_content for doc in documents]
-        embeddings = self.embedding_gen.generate_embeddings(texts)
+        embeddings = self.embedding_gen.embed_texts(texts)
         
         # Add to semantic index
         try:
