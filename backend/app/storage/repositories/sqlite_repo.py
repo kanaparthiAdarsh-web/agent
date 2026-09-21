@@ -9,9 +9,9 @@ import json
 
 # Use canonical schemas from app.schemas
 from app.schemas import (
-    PaperMetadata, PaperCard, ChunkData, SourceClaim, Evidence,
+    PaperMetadata, PaperCard, ChunkData, SourceClaim as Evidence,
     MethodologyComparison, DatasetComparison, ResultsComparison,
-    PaperComparisonMatrix, LimitationExtraction, LimitationCluster,
+    PaperComparisonMatrix, LimitationExtraction as Limitation, LimitationCluster,
     GapCandidate, GapVerification, Counterevidence, ResearchDirection,
     GapAnalysisResult, ResearchJob, WorkflowStatus, WorkflowStep, StepResult
 )
@@ -557,7 +557,7 @@ class JobRepository:
     
     def _row_to_job(self, row: sqlite3.Row) -> ResearchJob:
         """Convert database row to ResearchJob."""
-        from ..schemas.workflow import WorkflowStep
+        from app.schemas.workflow import WorkflowStep
         
         step_results = {}
         if row["step_results"]:
