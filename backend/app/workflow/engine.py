@@ -14,7 +14,7 @@ from app.indexing.adapter import IndexingAdapter
 from app.generation.papercard_generator import PaperCardGenerator
 from app.evidence.extractor import EvidenceExtractor
 from app.evidence.verifier import EvidenceVerifier
-from app.comparison.comparer import ComparisonEngine
+from app.comparison.engine import ComparisonEngine
 from app.limitations.extractor import LimitationExtractor
 from app.limitations.clustering import LimitationClustering
 from app.gaps.gap_finder import GapFinder
