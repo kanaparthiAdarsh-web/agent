@@ -72,7 +72,8 @@ class IndexingAdapter:
                 semantic_retriever=self.semantic_index,
                 bm25_retriever=self.bm25_index,
                 top_k=10,
-                method="rrf"  # Reciprocal Rank Fusion
+                method="rrf",  # Reciprocal Rank Fusion
+                embedding_generator=self.embedding_gen
             )
         return self._hybrid_index
     
@@ -90,42 +91,32 @@ class IndexingAdapter:
         if not chunks:
             return {"status": "no_chunks", "indexed_count": 0}
         
-        # Prepare documents for indexing
-        documents = []
-        chunk_metadata = []
+        # Prepare data for indexing
+        chunk_texts = []
+        chunk_metadata_list = []
         
         for chunk in chunks:
-            # Create LangChain Document
-            doc = Document(
-                page_content=chunk.content,
-                metadata={
-                    "paper_doi": chunk.paper_doi,
-                    "page_number": chunk.page_number,
-                    "section_title": chunk.section_title,
-                    "chunk_id": chunk.id
-                }
-            )
-            documents.append(doc)
-            chunk_metadata.append({
+            chunk_texts.append(chunk.content)
+            chunk_metadata_list.append({
                 "id": chunk.id,
-                "doi": chunk.paper_doi,
-                "page": chunk.page_number,
-                "section": chunk.section_title
+                "paper_doi": chunk.paper_doi,
+                "page_number": chunk.page_number,
+                "section_title": chunk.section_title,
+                "chunk_id": chunk.id
             })
         
         # Generate embeddings for semantic index
-        texts = [doc.page_content for doc in documents]
-        embeddings = self.embedding_gen.embed_texts(texts)
+        embeddings = self.embedding_gen.embed_texts(chunk_texts)
         
-        # Add to semantic index
+        # Add to semantic index using add_chunks
         try:
-            self.semantic_index.add_documents_with_embeddings(documents, embeddings)
+            self.semantic_index.add_chunks(embeddings, chunk_texts, chunk_metadata_list)
         except Exception as e:
             print(f"Warning: Failed to add to semantic index: {e}")
         
-        # Add to BM25 index
+        # Add to BM25 index using add_chunks
         try:
-            self.bm25_index.add_documents(documents)
+            self.bm25_index.add_chunks(chunk_texts, chunk_metadata_list)
         except Exception as e:
             print(f"Warning: Failed to add to BM25 index: {e}")
         
