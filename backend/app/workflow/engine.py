@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 from app.storage.schemas import Paper, PaperCard, Evidence, Comparison, Limitation, Gap, ResearchDirection, Job, PaperStatus
-from app.discovery.main import LiteratureDiscovery
+from app.discovery.service import DiscoveryService
 from app.acquisition.pdf_resolver import PDFResolver
 from app.ingestion.adapter import PDFIngestionAdapter
 from app.indexing.adapter import IndexingAdapter
@@ -44,7 +44,7 @@ class ResearchWorkflowEngine:
         self.repositories = get_repositories(db_path)
         
         # Initialize components
-        self.discovery = LiteratureDiscovery()
+        self.discovery = DiscoveryService()
         self.pdf_resolver = PDFResolver()
         self.pdf_ingestion = PDFIngestionAdapter()
         self.indexing = IndexingAdapter(index_dir=index_dir)

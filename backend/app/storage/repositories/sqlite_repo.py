@@ -7,14 +7,14 @@ from datetime import datetime
 from pathlib import Path
 import json
 
-from ..schemas import (
+from app.schemas import (
     PaperMetadata, PaperCard, ChunkData, SourceClaim, Evidence,
     MethodologyComparison, DatasetComparison, ResultsComparison,
     PaperComparisonMatrix, LimitationExtraction, LimitationCluster,
     GapCandidate, GapVerification, Counterevidence, ResearchDirection,
     GapAnalysisResult, ResearchJob, WorkflowStatus
 )
-from ..exceptions import StorageError
+from app.exceptions import StorageError
 
 logger = logging.getLogger(__name__)
 
